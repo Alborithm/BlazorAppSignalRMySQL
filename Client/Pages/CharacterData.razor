@@ -1,0 +1,91 @@
+@page "/characterdata"
+
+@using BlazorSignalRApp.Shared;
+@using BlazorSignalRApp.Shared.Helpers;
+@using Microsoft.AspNetCore.SignalR.Client;
+@inject NavigationManager NavigationManager   
+@inject HttpClient Http
+
+<h1>Characters List</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (characters == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Race</th>
+                <th>IsAlive</th>
+                <th>Proficiency</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var character in characters)
+            {
+                <tr>
+                    <td>@character.Id</td>
+                    <td>@character.CharName</td>
+                    <td>@character.Class</td>
+                    <td>@character.Race</td>
+                    <td>@character.IsAlive</td>
+                    <td>@character.Proficiency</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Characters> characters;
+    private HubConnection hubConnection;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //characters = await CharService.GetCharacterAsync();
+
+        hubConnection = new HubConnectionBuilder()  
+            .WithUrl(NavigationManager.ToAbsoluteUri("/broadcastHub"))  
+            .Build();  
+  
+        hubConnection.On("ReceiveMessage", () =>  
+        {  
+            CallLoadData();  
+            StateHasChanged();  
+        });  
+  
+        await hubConnection.StartAsync();  
+  
+        await LoadData();  
+    }
+
+    private void CallLoadData()   
+    {  
+        Task.Run(async () =>  
+        {  
+            await LoadData();  
+        });  
+    }  
+  
+    protected async Task LoadData()  
+    {  
+        characters = await Http.GetFromJsonAsync<List<Characters>>("api/Characters");  
+        //characters = await CharService.GetCharacterAsync();
+        StateHasChanged();  
+    }  
+  
+    public bool IsConnected =>  
+        hubConnection.State == HubConnectionState.Connected;  
+  
+    public void Dispose()  
+    {  
+        _ = hubConnection.DisposeAsync();  
+    }  
+}

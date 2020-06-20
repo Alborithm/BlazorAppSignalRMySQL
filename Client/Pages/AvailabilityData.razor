@@ -1,0 +1,88 @@
+@page "/availabilityData"
+
+@using BlazorSignalRApp.Shared.Models.OEE;
+@using Microsoft.AspNetCore.SignalR.Client;
+@inject NavigationManager NavigationManager   
+@inject HttpClient Http
+
+<h1>Availability List</h1>
+
+<p>Gets the entire list on availability.</p>
+
+@if (availabilityList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead> 
+            <tr>
+                <th>ID</th>
+                <th>Operation Number</th>
+                <th>Line</th>
+                <th>Status</th>
+                <th>Event Time</th>
+                <th>Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var field in availabilityList)
+            {
+                <tr>
+                    <td>@field.Id</td>
+                    <td>@field.OperationNumber</td>
+                    <td>@field.OperationLine</td>
+                    <td>@field.Available</td>
+                    <td>@field.EventTime</td>
+                    <td>@field.Code</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Availability> availabilityList;
+    private HubConnection hubConnection;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        hubConnection = new HubConnectionBuilder()  
+            .WithUrl(NavigationManager.ToAbsoluteUri("/oeeHub"))  
+            .Build();  
+  
+        hubConnection.On("ReceiveMessage", () =>  
+        {  
+            CallLoadData();  
+            StateHasChanged();  
+        });  
+  
+        await hubConnection.StartAsync();  
+  
+        await LoadData();  
+    }
+
+    private void CallLoadData()   
+    {  
+        Task.Run(async () =>  
+        {  
+            await LoadData();  
+        });  
+    }  
+  
+    protected async Task LoadData()  
+    {  
+        availabilityList = await Http.GetFromJsonAsync<List<Availability>>("api/oee/availability");  
+        StateHasChanged();  
+    }  
+  
+    public bool IsConnected =>  
+        hubConnection.State == HubConnectionState.Connected;  
+  
+    public void Dispose()  
+    {  
+        _ = hubConnection.DisposeAsync();  
+    }  
+}

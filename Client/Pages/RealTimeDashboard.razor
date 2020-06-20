@@ -1,0 +1,61 @@
+@page "/realTimeDashboard"
+
+@using BlazorSignalRApp.Shared.Models.OEE;
+@using Microsoft.AspNetCore.SignalR.Client;
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+
+<h1>Real Time Dashboard</h1>
+
+<!--Create a loading for each element of the dashboard for better UI responsive -->
+@if (EquipmentList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+}
+
+@code {
+    private List<Availability> EquipmentList;
+    private HubConnection hubConnection;
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(NavigationManager.ToAbsoluteUri("/oeeHub"))
+            .Build();
+
+        hubConnection.On("ReceiveMessage", () =>
+        {
+            CallLoadData();
+            StateHasChanged();
+        });
+
+        await hubConnection.StartAsync();
+
+        await LoadData();
+    }
+
+    private void CallLoadData()
+    {
+        Task.Run(async () =>
+        {
+            await LoadData();
+        });
+    }
+    
+    protected async Task LoadData()
+    {
+        EquipmentList = await Http.GetFromJsonAsync<List<Availability>>("api/oee/Availability");
+    }
+
+    public bool IsConnected =>
+        hubConnection.State == HubConnectionState.Connected;
+
+    public void Dispose()
+    {
+        _ = hubConnection.DisposeAsync();
+    }
+}

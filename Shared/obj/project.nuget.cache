@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "sz65vCrSAKZ77Do85KpjmaA27wOmSQPBS2lz2NOv5f52Ci25IOQ7QY2YW3Vhz4L7uFo+bUF6pUncN/HVesckhg==",
+  "success": true,
+  "projectFilePath": "/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Shared/BlazorSignalRApp.Shared.csproj",
+  "expectedPackageFiles": [
+    "/Users/gerardoalbor/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
