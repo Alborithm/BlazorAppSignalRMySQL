@@ -13,6 +13,7 @@ using BlazorSignalRApp.Server.Hubs;
 using BlazorSignalRApp.Shared.Models.OEE;
 using System.Net.Http;
 using System.Net;
+using System.Net.Http.Json;
 
 namespace BlazorSignalRApp.Server.Controllers
 {
@@ -69,9 +70,33 @@ namespace BlazorSignalRApp.Server.Controllers
 
         [HttpGet("realtime")]
         //[Route("api/oee/availability/realtime")]
-        public ActionResult<List<Availability>> GetAvailabilityRealTime([FromBody]Availability[] operations)
+        public ActionResult<List<RealTime>> GetAvailabilityRealTime()
         {
-            return NotFound();
+            List<RealTime> entity = GetRealTimeList();
+            if  (entity != null)
+            {
+                return Ok(entity);
+            }
+            else
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.ReasonPhrase = "No table found";
+                return NotFound("Table OeeRealTime not found");
+            }
+        }
+
+        private List<RealTime> GetRealTimeList()
+        {
+            List<RealTime> output;
+            
+            string query = "SELECT * FROM `MessureDB`.`OeeRealTime`;";
+
+            using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
+            {
+                output = con.Query<RealTime>(query).AsList();
+            }
+
+            return output;
         }
 
         [HttpPost]
@@ -83,14 +108,22 @@ namespace BlazorSignalRApp.Server.Controllers
             {
                 Availability NewestAvailability = GetActualAvailability(operation.OperationNumber, operation.OperationLine);
 
-                string query = CreateInsertQuery(operation.OperationNumber, operation.OperationLine, !NewestAvailability.Available, DateTime.UtcNow, 0);
+                string query = CreateInsertAvailabilityQuery(operation.OperationNumber, operation.OperationLine, !NewestAvailability.Available, DateTime.UtcNow, 0);
 
                 using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
                 {
                     con.Execute(query);
                 }
 
-                _hubContext.Clients.All.SendAsync("ReceiveMessage");                
+                // RealTime realTimeData = new RealTime()
+                // {
+                //     OperationNumber = operation.OperationNumber,
+                //     OperationLine = operation.OperationLine,
+                //     Available = !NewestAvailability.Available,
+                //     FailCode = 0
+                // };
+
+
 
                 var response = new HttpResponseMessage(HttpStatusCode.Created);
                 
@@ -109,11 +142,21 @@ namespace BlazorSignalRApp.Server.Controllers
                 // builder.Path = Request.Path;
                 // builder.Query = Request.QueryString.ToUriComponent();
 
+                string uri = Microsoft.AspNetCore.Http.Extensions.UriHelper.GetEncodedUrl(Request);
                 response.Headers.Location = 
                 //    new Uri(Microsoft.AspNetCore.Http.Extensions.UriHelper.GetDisplayUrl(Request));
                 //    builder.Uri;
                     new Uri(Microsoft.AspNetCore.Http.Extensions.UriHelper.GetEncodedUrl(Request));
 
+                // using (HttpClient http = new HttpClient())
+                // {
+                //     http.PutAsJsonAsync
+                //         ((uri + $"/{realTimeData.OperationLine}/{realTimeData.OperationNumber}"),
+                //         realTimeData);
+                // }
+
+                _hubContext.Clients.All.SendAsync("ReceiveMessage");                
+                
                 return response;
             }
             catch (Exception ex)
@@ -123,6 +166,31 @@ namespace BlazorSignalRApp.Server.Controllers
 
                 return response;
             }
+        }
+
+        [HttpPut("{line}/{op}")]
+        public void UpdateAvailabilityOnRealTime(
+            [FromBody]RealTime realTime, [FromRoute]int line, [FromRoute]int op)
+        {
+            // string query = "UPDATE `MessureDB`.`OeeRealTime` " +
+            //     "SET " +
+            //     $"`Available` = {realTime.Available}, " +
+            //     $"`FailCode` = {realTime.FailCode} " +
+            //     $"WHERE `OperationNumber` = {realTime.OperationNumber} " +
+            //     $"AND `OperationLine` = {realTime.OperationLine};";
+
+            string query = "CALL SpUpdateOrInsertOeeRealTime(" +
+                $"{op}, " +
+                $"{line}, " +
+                $"{realTime.Available}, " +
+                $"{realTime.FailCode})";
+
+            using (MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
+            {
+                con.Execute(query);
+            }
+
+
         }
 
         private Availability GetActualAvailability(int operation, int line)
@@ -135,11 +203,10 @@ namespace BlazorSignalRApp.Server.Controllers
             {
                 return con.Query<Availability>(query).FirstOrDefault();
             }
-            
-            throw new NotImplementedException();
+
         }
 
-        private string CreateInsertQuery(int operation, int line, bool available, DateTime eventTime, int code)
+        private string CreateInsertAvailabilityQuery(int operation, int line, bool available, DateTime eventTime, int code)
         {
             // ToDo add conditional for the nullable code (when it is zero)
             string query = "INSERT INTO `MessureDB`.`Availability` " +
@@ -172,6 +239,8 @@ namespace BlazorSignalRApp.Server.Controllers
             {
                 output += $"{operation.OperationNumber} AND ";
             }
+
+            return "";
         }
     }
 }

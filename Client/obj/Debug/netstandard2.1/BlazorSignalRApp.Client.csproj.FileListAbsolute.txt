@@ -432,12 +432,12 @@
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/mRd6TL4DYldo1ko9czkjEDcoiPdMPrJxz3dekwV6OOY=.hash
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/compressed/_framework/_bin/Newtonsoft.Json.dll.gz
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/compressed/_framework/_bin/Newtonsoft.Json.dll.br
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/u1hoSQSco0Rp2HTyZRZ2POGeXHY4TFqrxm-6hmV1jXM=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/QJOLpdp2D6cyjC2UAS7E9FsCzWrq1yWaBY5ox_uHiUI=.hash
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/RazorDeclaration/Pages/AvailabilityData.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/Razor/Pages/AvailabilityData.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/RazorDeclaration/Pages/RealTimeDashboard.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/Razor/Pages/RealTimeDashboard.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/9T9MeULjixSVZvLv7_Nl4VSTSvnJPlmleeUHBdHBHAI=.hash
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/0_tV9kuopjUI8mFQe3BFEiQpDH18LUX4nVKGGnCGedg=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/Vcgm03fTW9C1MwtUduVBLECnx-ImxQcVFogYRrqhYv8=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/E_-E6S2hOyY0vM9rol4XfP6jMFBZQyS6PvaCoGhPRZw=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/1yWToeAmy4jLdotTP4GL6PcjhSmdhjiusvEOrTTgVUo=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/hbK_ib6wwvEkBl5BU5Cy99xuQdN3sKI6yTGfkkDOno4=.hash

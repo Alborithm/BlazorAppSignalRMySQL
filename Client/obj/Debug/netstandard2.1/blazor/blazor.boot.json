@@ -58,7 +58,7 @@
       "System.ComponentModel.Annotations.dll": "sha256-tmnkCmP9OzLUkpQ3LP7PRosi7gt5pyfEZCM6aqAokFI=",
       "System.ComponentModel.DataAnnotations.dll": "sha256-EVfe2zztNlGz7ITa8KrrSFdmM80WWrH3G9ETg5Nbg8Q=",
       "Microsoft.AspNetCore.Components.dll": "sha256-jqp6xS5jDFDsISGorhiYZQ2if3hAiols6d4C5BNnMQ4=",
-      "BlazorSignalRApp.Shared.dll": "sha256-u1hoSQSco0Rp2HTyZRZ2POGeXHY4TFqrxm\/6hmV1jXM=",
+      "BlazorSignalRApp.Shared.dll": "sha256-E+\/E6S2hOyY0vM9rol4XfP6jMFBZQyS6PvaCoGhPRZw=",
       "Newtonsoft.Json.dll": "sha256-mRd6TL4DYldo1ko9czkjEDcoiPdMPrJxz3dekwV6OOY=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-I5xBvtstpr6vHKza7HYCKwtiIABk8jo9buNAyf4BUFY=",
       "Microsoft.Extensions.Configuration.dll": "sha256-jpSRfsr97m71a5QnEO1fl+9W77vUeIRmfbXCSJLLg\/8=",
@@ -73,7 +73,7 @@
     },
     "pdb": {
       "BlazorSignalRApp.Client.pdb": "sha256-0+tV9kuopjUI8mFQe3BFEiQpDH18LUX4nVKGGnCGedg=",
-      "BlazorSignalRApp.Shared.pdb": "sha256-QJOLpdp2D6cyjC2UAS7E9FsCzWrq1yWaBY5ox+uHiUI="
+      "BlazorSignalRApp.Shared.pdb": "sha256-1yWToeAmy4jLdotTP4GL6PcjhSmdhjiusvEOrTTgVUo="
     },
     "runtime": {
       "dotnet.3.2.0-rc1.20222.2.js": "sha256-iZCHkFXJWYNxCUFwhj+4oqR4fkEJc5YGjfTTvdIuX84=",
