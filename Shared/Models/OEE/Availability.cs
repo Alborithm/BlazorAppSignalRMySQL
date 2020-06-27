@@ -4,29 +4,60 @@ namespace BlazorSignalRApp.Shared.Models.OEE
 {
     public class Availability
     {
-        private int _id;
-        public int Id
+        private string _department;
+        public string Department
         {
-            get { return _id; }
-            set { _id = value; }
+            get { return _department; }
+            set { _department = value; }
         }
-        private int _operationNumber;
-        public int OperationNumber
+        
+        private string _area;
+        public string Area
         {
-            get { return _operationNumber; }
-            set { _operationNumber = value; }
+            get { return _area; }
+            set { _area = value; }
         }
-        private int _operationLine;
-        public int OperationLine
+        
+        private string _lineName;
+        public string LineName
         {
-            get { return _operationLine; }
-            set { _operationLine = value; }
+            get { return _lineName; }
+            set { _lineName = value; }
         }
+        
+        private int _lineId;
+        public int LineId
+        {
+            get { return _lineId; }
+            set { _lineId = value; }
+        }
+        
+        private int _opNumber;
+        public int OpNumber
+        {
+            get { return _opNumber; }
+            set { _opNumber = value; }
+        }
+        
+        private string _opName;
+        public string OpName
+        {
+            get { return _opName; }
+            set { _opName = value; }
+        }
+        
         private bool _available;
         public bool Available
         {
             get { return _available; }
             set { _available = value; }
+        }
+        
+        private int _failCode;
+        public int FailCode
+        {
+            get { return _failCode; }
+            set { _failCode = value; }
         }
         
         private DateTime _eventTime;
@@ -36,12 +67,6 @@ namespace BlazorSignalRApp.Shared.Models.OEE
             set { _eventTime = value; }
         }
         
-        private int _code;
-        public int Code
-        {
-            get { return _code; }
-            set { _code = value; }
-        }
         
     }
 }

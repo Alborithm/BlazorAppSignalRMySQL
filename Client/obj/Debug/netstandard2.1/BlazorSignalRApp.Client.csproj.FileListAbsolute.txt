@@ -436,8 +436,8 @@
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/Razor/Pages/AvailabilityData.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/RazorDeclaration/Pages/RealTimeDashboard.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/Razor/Pages/RealTimeDashboard.razor.g.cs
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/9T9MeULjixSVZvLv7_Nl4VSTSvnJPlmleeUHBdHBHAI=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/0_tV9kuopjUI8mFQe3BFEiQpDH18LUX4nVKGGnCGedg=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/E_-E6S2hOyY0vM9rol4XfP6jMFBZQyS6PvaCoGhPRZw=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/1yWToeAmy4jLdotTP4GL6PcjhSmdhjiusvEOrTTgVUo=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/hbK_ib6wwvEkBl5BU5Cy99xuQdN3sKI6yTGfkkDOno4=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/fwzKsR3RjUHArX1zzvExbYT91ujncvzNRC2ls0_9nzo=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/AOKpeBqBOO_ejjHf0fuMQrBeWpeR3AO8aCdTQHeiZaI=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/jpeYpUXpNM9XqzbuQj-ddY1NhNprRmMRlBu5rage-Ns=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/FKicIGZ63rDppm44BcvBKa4VvO9E7wfx5TqJh7Q5N_0=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/r_s22fdV8nAQ0PKdRYHRjm_H5OKzHNQji2shxGHzZOI=.hash

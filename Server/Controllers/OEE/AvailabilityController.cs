@@ -32,27 +32,150 @@ namespace BlazorSignalRApp.Server.Controllers
 
         // GET: api/oee/Availability
         [HttpGet]
-        public IEnumerable<Availability> GetAvailability()
+        public ActionResult<IEnumerable<Availability>> GetAvailability()
         {
-            List<Availability> CharactersOutput = new List<Availability>();
+            List<Availability> availabilityList;
+
+
             using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
             {
-                var output = con.Query<Availability>("SELECT * FROM Availability");
+                var output = con.Query<Availability>("CALL SpGetAvailabilityTable();");
 
-                CharactersOutput = output.AsList();
+                availabilityList = output.AsList();
             }
-            
-            return CharactersOutput;
+
+            if (availabilityList.Count != 0)
+            {
+                return Ok(availabilityList);
+            }
+            else
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.ReasonPhrase = "Request unsuccesful";
+                return NotFound("Procedure call did not return a value");
+            }
+        }
+
+        // GET: api/oee/Availability/TimeFilter
+        [HttpGet("timeFilter")]
+        public ActionResult<IEnumerable<Availability>> GetAvailabilityTimeFilter(
+            [FromBody]FromToTime fromToTime
+        )
+        {
+            List<Availability> availabilityList;
+
+            if (fromToTime.From >= fromToTime.To)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                response.ReasonPhrase = "Request unsuccesful";
+                return NotFound("'To' value must be higher than 'From' value");
+            }
+
+
+
+            using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
+            {
+                var output = con.Query<Availability>("CALL SpGetAvailabilityTableByTime(" +
+                    String.Format("{0}, ", ParseDateToMySqlTimestampFunc(fromToTime.From)) +
+                    String.Format("{0});", ParseDateToMySqlTimestampFunc(fromToTime.To)));
+
+                availabilityList = output.AsList();
+            }
+
+            if (availabilityList.Count != 0)
+            {
+                return Ok(availabilityList);
+            }
+            else
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.ReasonPhrase = "Request unsuccesful";
+                return NotFound("Procedure call did not return a value");
+            }
         }
 
         // GET: api/oee/Availability/1/10
-        [HttpGet("{id}/{op}")]
-        public ActionResult<Availability> GetAvailabilityOfOp(int id, int op)
+        [HttpGet("{lineId}/{opNumber}")]
+        public ActionResult<IEnumerable<Availability>> GetAvailabilityOfOperation(int lineId, int opNumber)
+        {
+            List<Availability> availabilityList;
+
+
+            using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
+            {
+                var output = con.Query<Availability>(
+                    $"CALL SpGetAvailabilityTableOfOperation({lineId}, {opNumber});");
+
+                availabilityList = output.AsList();
+            }
+
+            if (availabilityList.Count != 0)
+            {
+                return Ok(availabilityList);
+            }
+            else
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.ReasonPhrase = "Request unsuccesful";
+                return NotFound("Entity with Line Id = \'" + lineId.ToString() + 
+                    "\' and Operation number = \'" + opNumber.ToString() + "\' not found");
+            }
+        }
+
+        // GET: api/oee/Availability/1/10/TimeFilter
+        [HttpGet("{lineId}/{opNumber}/timeFilter")]
+        public ActionResult<IEnumerable<Availability>> GetAvailabilityOfOperationTimeFilter(
+            int lineId, int opNumber ,[FromBody]FromToTime fromToTime
+        )
+        {
+            List<Availability> availabilityList;
+
+            if (fromToTime.From >= fromToTime.To)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                response.ReasonPhrase = "Request unsuccesful";
+                return NotFound("'To' value must be higher than 'From' value");
+            }
+
+
+
+            using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
+            {
+                var output = con.Query<Availability>("CALL SpGetAvailabilityTableOfOperationByTime(" +
+                    $"{lineId}, {opNumber}, " +
+                    String.Format("{0}, ", ParseDateToMySqlTimestampFunc(fromToTime.From)) +
+                    String.Format("{0});", ParseDateToMySqlTimestampFunc(fromToTime.To)));
+
+                availabilityList = output.AsList();
+            }
+
+            if (availabilityList.Count != 0)
+            {
+                return Ok(availabilityList);
+            }
+            else
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.ReasonPhrase = "Request unsuccesful";
+                return NotFound("Procedure call did not return a value");
+            }
+        }
+
+        private string ParseDateToMySqlTimestampFunc(DateTime time)
+        {
+            string output = $"TIMESTAMP('{time.Year}-{time.Month}-{time.Day} {time.Hour}:{time.Minute}:{time.Second}')";
+            return output;
+        }
+// To be erased, implementing new version
+/*
+        // GET: api/oee/Availability/1/10
+        [HttpGet("{lineId}/{op}")]
+        public ActionResult<Availability> GetAvailabilityOfOp(int lineId, int op)
         {
             // Method taken from: 
             // https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-3.0
             
-            Availability entity = GetActualAvailability(op, id);
+            Availability entity = GetActualAvailability(op, lineId);
             if  (entity != null)
             {
                 return Ok(entity);
@@ -61,13 +184,13 @@ namespace BlazorSignalRApp.Server.Controllers
             {
                 var response = new HttpResponseMessage(HttpStatusCode.NotFound);
                 response.ReasonPhrase = "Machine not found";
-                return NotFound("Entity with Line Id = \'" + id.ToString() + 
+                return NotFound("Entity with Line Id = \'" + lineId.ToString() + 
                     "\' and Operation number = \'" + op.ToString() + "\' not found");
             }
 
             //return entity;
         }
-
+*/
         [HttpGet("realtime")]
         //[Route("api/oee/availability/realtime")]
         public ActionResult<List<RealTime>> GetAvailabilityRealTime()
@@ -98,7 +221,8 @@ namespace BlazorSignalRApp.Server.Controllers
 
             return output;
         }
-
+// Post and Put methods not needed right now
+/*
         [HttpPost]
         public HttpResponseMessage PostAvailabilityChange([FromBody]Availability operation)
         {
@@ -192,7 +316,7 @@ namespace BlazorSignalRApp.Server.Controllers
 
 
         }
-
+*/
         private Availability GetActualAvailability(int operation, int line)
         {
             string query = "SELECT * FROM `MessureDB`.`Availability` " +
@@ -229,18 +353,21 @@ namespace BlazorSignalRApp.Server.Controllers
             return output;
         }
 
-        private string CreateSelectAllQueryFromOperations(Availability[] operations)
+        public class FromToTime
         {
-            string output = "SELECT * FROM `MessureDB`.`Availability` " +
-                "WHERE ( `OperationNumber` = ";
-
-            int i = 0;
-            foreach (Availability operation in operations)
+            private DateTime _from;
+            public DateTime From
             {
-                output += $"{operation.OperationNumber} AND ";
+                get { return _from; }
+                set { _from = value; }
             }
-
-            return "";
+            
+            private DateTime _to;
+            public DateTime To
+            {
+                get { return _to; }
+                set { _to = value; }
+            }
         }
     }
 }
