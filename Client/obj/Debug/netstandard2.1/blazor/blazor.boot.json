@@ -6,7 +6,7 @@
   "linkerEnabled": false,
   "resources": {
     "assembly": {
-      "BlazorSignalRApp.Client.dll": "sha256-6G4PB6FiucF1inoTn7fSIHpgLRq9R+nQeLeQbW4oIIo=",
+      "BlazorSignalRApp.Client.dll": "sha256-x5jtuFnyNszpA+tVx7lMYbdxs8CqQsayfgM5CrPjGK4=",
       "System.Net.Http.Json.dll": "sha256-+IansbyiPIbBxBPwqKb6GLCNiqhuqeIc5S8yC5s7yF4=",
       "System.Buffers.dll": "sha256-ZxXy75PYbzJxNfAc\/SAP1nUYm4gt1jSaOpFnBb9m85M=",
       "mscorlib.dll": "sha256-uaG3AW80GeXVlZrMLb3Q0VZ6jBkzXqzaUAgKgtZbStA=",
@@ -75,7 +75,7 @@
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-u5WlE+3+OPkr0mlHMJ6pS5OWVuHC3rk2HWyyA3R+xVY="
     },
     "pdb": {
-      "BlazorSignalRApp.Client.pdb": "sha256-Wmc\/E0hm9WXBVPUN9yKnDgsiKlwRBqZTRssoT2ywCxg=",
+      "BlazorSignalRApp.Client.pdb": "sha256-oCejQq\/GcGIQkU6\/vYF0MU7e4c6TPnNNqMwW\/PlJcDY=",
       "BlazorSignalRApp.Shared.pdb": "sha256-AOKpeBqBOO+ejjHf0fuMQrBeWpeR3AO8aCdTQHeiZaI=",
       "Blazor.Extensions.Canvas.pdb": "sha256-lfpBppWTFuUmtA8UPNR+2CVhJ94wjIhvI+iJUicm6Z4="
     },

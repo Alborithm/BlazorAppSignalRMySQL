@@ -1,7 +1,7 @@
 {
   "FilesToCompress": [
     {
-      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/6G4PB6FiucF1inoTn7fSIHpgLRq9R_nQeLeQbW4oIIo=.hash",
+      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/x5jtuFnyNszpA_tVx7lMYbdxs8CqQsayfgM5CrPjGK4=.hash",
       "Source": "\/Users\/gerardoalbor\/Repositories\/BlazorTest\/ChatTutorial\/BlazorSignalRApp\/Client\/obj\/Debug\/netstandard2.1\/blazor\/unlinked\/BlazorSignalRApp.Client.dll",
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/_bin\/BlazorSignalRApp.Client.dll.br"
     },
@@ -336,7 +336,7 @@
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/_bin\/Microsoft.JSInterop.WebAssembly.dll.br"
     },
     {
-      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/Wmc-E0hm9WXBVPUN9yKnDgsiKlwRBqZTRssoT2ywCxg=.hash",
+      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/oCejQq-GcGIQkU6-vYF0MU7e4c6TPnNNqMwW-PlJcDY=.hash",
       "Source": "\/Users\/gerardoalbor\/Repositories\/BlazorTest\/ChatTutorial\/BlazorSignalRApp\/Client\/obj\/Debug\/netstandard2.1\/blazor\/unlinked\/BlazorSignalRApp.Client.pdb",
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/_bin\/BlazorSignalRApp.Client.pdb.br"
     },
@@ -371,7 +371,7 @@
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/blazor.webassembly.js.br"
     },
     {
-      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/W8b0O3SKMExV_DLUGa1B7wVYkmlfNejExftHdOswqjw=.hash",
+      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/yFFHrbdWzpE7FmOkoCPESZR-OnAypgxVo0ha4zYLIaI=.hash",
       "Source": "\/Users\/gerardoalbor\/Repositories\/BlazorTest\/ChatTutorial\/BlazorSignalRApp\/Client\/obj\/Debug\/netstandard2.1\/blazor\/blazor.boot.json",
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/blazor.boot.json.br"
     }

@@ -208,6 +208,77 @@ namespace BlazorSignalRApp.Server.Controllers
             string output = $"TIMESTAMP('{time.Year}-{time.Month}-{time.Day} {time.Hour}:{time.Minute}:{time.Second}')";
             return output;
         }
+
+        [HttpPost]
+        public HttpResponseMessage PostAvailabilityChange([FromBody]Availability operation)
+        {
+            // TODO get the Id of the newly created item, posible solution is to get it by a 
+            // stored procedure on MySQL
+            try
+            {
+                Availability NewestAvailability = GetActualAvailability(operation.OpNumber, operation.LineId);
+
+                // string query = CreateInsertAvailabilityQuery(operation.OpNumber, operation.LineId, !NewestAvailability.Available, DateTime.UtcNow, 0);
+
+                string query = $"CALL SpWriteAvailabilityTemp({operation.OpNumber},{operation.LineId},{!NewestAvailability.Available},{ParseDateToMySqlTimestampFunc(DateTime.UtcNow)},1)";
+
+                using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
+                {
+                    con.Execute(query);
+                }
+
+                // RealTime realTimeData = new RealTime()
+                // {
+                //     OperationNumber = operation.OperationNumber,
+                //     OperationLine = operation.OperationLine,
+                //     Available = !NewestAvailability.Available,
+                //     FailCode = 0
+                // };
+
+
+
+                var response = new HttpResponseMessage(HttpStatusCode.Created);
+                
+                // Method 1, GetDisplayUrl() not recomended for using on headers or body
+                // https://docs.microsoft.com/ru-ru/dotnet/api/microsoft.aspnetcore.http.extensions.urihelper.getdisplayurl?view=aspnetcore-2.2
+                // new Uri(Microsoft.AspNetCore.Http.Extensions.UriHelper.GetDisplayUrl(Request));
+                
+                // Method 2, Uri Builder
+                // https://stackoverflow.com/questions/31617345/what-is-the-asp-net-core-mvc-equivalent-to-request-requesturi
+                // var builder = new UriBuilder();
+                // builder.Scheme = Request.Scheme;
+                // builder.Host = Request.Host.Value;
+                // builder.Host = Request.Host.Host;
+                // // this might be wrong
+                // builder.Port = Request.Host.Port.Value;
+                // builder.Path = Request.Path;
+                // builder.Query = Request.QueryString.ToUriComponent();
+
+                string uri = Microsoft.AspNetCore.Http.Extensions.UriHelper.GetEncodedUrl(Request);
+                response.Headers.Location = 
+                //    new Uri(Microsoft.AspNetCore.Http.Extensions.UriHelper.GetDisplayUrl(Request));
+                //    builder.Uri;
+                    new Uri(Microsoft.AspNetCore.Http.Extensions.UriHelper.GetEncodedUrl(Request));
+
+                // using (HttpClient http = new HttpClient())
+                // {
+                //     http.PutAsJsonAsync
+                //         ((uri + $"/{realTimeData.OperationLine}/{realTimeData.OperationNumber}"),
+                //         realTimeData);
+                // }
+
+                _hubContext.Clients.All.SendAsync("ReceiveMessage");                
+                
+                return response;
+            }
+            catch (Exception ex)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                response.ReasonPhrase = ex.Message;
+
+                return response;
+            }
+        }
 // To be erased, implementing new version
 /*
         // GET: api/oee/Availability/1/10

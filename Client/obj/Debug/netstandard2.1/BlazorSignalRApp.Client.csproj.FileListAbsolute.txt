@@ -468,6 +468,6 @@
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/compressed/_framework/_bin/Microsoft.CSharp.dll.br
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/RazorDeclaration/Pages/AvailabilityStepped.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/Razor/Pages/AvailabilityStepped.razor.g.cs
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/6G4PB6FiucF1inoTn7fSIHpgLRq9R_nQeLeQbW4oIIo=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/Wmc-E0hm9WXBVPUN9yKnDgsiKlwRBqZTRssoT2ywCxg=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/W8b0O3SKMExV_DLUGa1B7wVYkmlfNejExftHdOswqjw=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/x5jtuFnyNszpA_tVx7lMYbdxs8CqQsayfgM5CrPjGK4=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/oCejQq-GcGIQkU6-vYF0MU7e4c6TPnNNqMwW-PlJcDY=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/yFFHrbdWzpE7FmOkoCPESZR-OnAypgxVo0ha4zYLIaI=.hash
