@@ -14,11 +14,40 @@
 }
 else
 {
-
+    <div>
+        
+    </div>
+    <div>
+    <table class="table">
+        <thead> 
+            <tr>
+                <th>Department</th>
+                <th>Area</th>
+                <th>Line</th>
+                <th>Operation</th>
+                <th>Available</th>
+                <th>Fail Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var field in EquipmentList)
+            {
+                <tr>
+                    <td>@field.Department</td>
+                    <td>@field.Area</td>
+                    <td>@field.LineName</td>
+                    <td>@field.OpName</td>
+                    <td>@field.Available</td>
+                    <td>@field.FailCode</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
 }
 
 @code {
-    private List<Availability> EquipmentList;
+    private List<RealTime> EquipmentList;
     private HubConnection hubConnection;
 
     protected override async Task OnInitializedAsync()
@@ -48,7 +77,7 @@ else
     
     protected async Task LoadData()
     {
-        EquipmentList = await Http.GetFromJsonAsync<List<Availability>>("api/oee/Availability");
+        EquipmentList = await Http.GetFromJsonAsync<List<RealTime>>("api/oee/realTime");
     }
 
     public bool IsConnected =>

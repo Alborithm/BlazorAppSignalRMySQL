@@ -50,8 +50,12 @@ obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.AspNetCore.Components.Forms.d
 obj/Debug/netstandard2.1/blazor/unlinked/System.ComponentModel.Annotations.dll
 obj/Debug/netstandard2.1/blazor/unlinked/System.ComponentModel.DataAnnotations.dll
 obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.AspNetCore.Components.dll
-obj/Debug/netstandard2.1/blazor/unlinked/BlazorSignalRApp.Shared.dll
+obj/Debug/netstandard2.1/blazor/unlinked/ChartJs.Blazor.dll
+obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.CSharp.dll
 obj/Debug/netstandard2.1/blazor/unlinked/Newtonsoft.Json.dll
+obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.JSInterop.dll
+obj/Debug/netstandard2.1/blazor/unlinked/BlazorSignalRApp.Shared.dll
+obj/Debug/netstandard2.1/blazor/unlinked/Blazor.Extensions.Canvas.dll
 obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.AspNetCore.Components.WebAssembly.dll
 obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.Extensions.Configuration.dll
 obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.Extensions.Configuration.Abstractions.dll
@@ -60,7 +64,7 @@ obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.Extensions.Configuration.File
 obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.Extensions.FileProviders.Physical.dll
 obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.Extensions.FileSystemGlobbing.dll
 obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.Extensions.FileProviders.Abstractions.dll
-obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.JSInterop.dll
 obj/Debug/netstandard2.1/blazor/unlinked/Microsoft.JSInterop.WebAssembly.dll
 obj/Debug/netstandard2.1/blazor/unlinked/BlazorSignalRApp.Client.pdb
 obj/Debug/netstandard2.1/blazor/unlinked/BlazorSignalRApp.Shared.pdb
+obj/Debug/netstandard2.1/blazor/unlinked/Blazor.Extensions.Canvas.pdb

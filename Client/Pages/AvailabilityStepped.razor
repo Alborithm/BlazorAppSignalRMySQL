@@ -1,0 +1,283 @@
+@page "/availabilityStepped"
+
+@using BlazorSignalRApp.Shared.Models.OEE;
+@using Microsoft.AspNetCore.SignalR.Client;
+@using ChartJs.Blazor.ChartJS.LineChart;
+@using ChartJs.Blazor.Charts;
+@using ChartJs.Blazor.ChartJS.Common.Properties;
+@using ChartJs.Blazor.Util;
+@using Newtonsoft.Json;
+
+@inject NavigationManager NavigationManager   
+@inject HttpClient Http
+
+@inherits AvailabilityChartComponent
+
+<h1>Availability</h1>
+
+<p>Using charts</p>
+
+@if (availabilityList == null)
+{
+    <ChartJsLineChart @ref="_lineChartJs" Config="@_config" Width="300" Height="150"/>
+}
+else
+{
+    <div class="containter">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6">
+                <ChartJsLineChart @ref="_lineChartJs" Config="@_config" Width="300" Height="150"/>
+            </div>
+            <div class="col"></div>
+
+        </div>
+    </div>
+    <div>
+        <table class="tableDowntime">
+            <thead>
+                <tr>
+                    <th>Uptime</th>
+                    <th>Downtime</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@dataDowntime[0]</td>
+                    <td>@dataDowntime[1]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table class="table">
+        <thead> 
+            <tr>
+                <th>Department</th>
+                <th>Area</th>
+                <th>Line</th>
+                <th>Operation</th>
+                <th>Available</th>
+                <th>Fail Code</th>
+                <th>Event Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var field in availabilityList)
+            {
+                <tr>
+                    <td>@field.Department</td>
+                    <td>@field.Area</td>
+                    <td>@field.LineName</td>
+                    <td>@field.OpName</td>
+                    <td>@field.Available</td>
+                    <td>@field.FailCode</td>
+                    <td>@field.EventTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+}
+
+
+@code{
+    private List<Availability> availabilityList;
+    private HubConnection hubConnection;
+    private ChartJsLineChart _lineChartJs;
+    private LineConfig _config;
+    private LineData lineData;
+    private LineDataset<double[]> lineSet;
+    private double[] dataDowntime;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()  
+            .WithUrl(NavigationManager.ToAbsoluteUri("/oeeHub"))  
+            .Build();
+
+        _config = new LineConfig()
+        {
+            Options = new LineOptions
+            {
+                Title = new OptionsTitle
+                {
+                    Display = true,
+                    Text = "Simple Bar Chart"
+                },
+                Legend = new ChartJs.Blazor.ChartJS.Common.Handlers.Legend
+                {
+                    Display = false
+                },
+                MaintainAspectRatio = false,
+                Responsive = true
+            }
+        };
+
+        lineData = new LineData()
+        {
+            Labels = new List<string>(new string[] {"Hello", "World", "Amigo"})
+        };
+
+        lineSet = new LineDataset<double[]>()
+            {
+                Label = "My double dataset",
+                BackgroundColor = "ff0000",
+                BorderWidth = 1,
+                PointBackgroundColor = "#009900",
+                PointRadius = 3,
+                BorderColor = "#ffffff",
+                SteppedLine = ChartJs.Blazor.ChartJS.Common.Enums.SteppedLine.True
+            };
+
+        lineSet.AddRange(new [] {
+            //new DataPoints() { xAxis = new DateTime(20,07,02,12,00,00), yAxis = 1},
+            //new DataPoints() { xAxis = new DateTime(20,07,02,12,20,00), yAxis = 0},
+            //new DataPoints() { xAxis = new DateTime(20,07,02,13,00,00), yAxis = 1}
+            new double[]{1,2},
+            new double[]{2,0},
+            new double[]{3,5}
+        });
+        lineSet.Add(new double[]{4,2});
+
+
+        //_config.Data.Labels.AddRange(new[] {"A", "B", "C"});
+        _config.Data.Labels = null;
+        _config.Data.Datasets.Add(lineSet);
+
+        
+  
+        hubConnection.On("ReceiveMessage", () =>  
+        {  
+            CallLoadData();  
+            StateHasChanged();  
+        });  
+  
+        await hubConnection.StartAsync();  
+  
+        await LoadData();
+    }
+
+    private void CallLoadData()   
+    {  
+        Task.Run(async () =>  
+        {  
+            await LoadData();  
+        });  
+    }  
+  
+    protected async Task LoadData()  
+    {  
+        FromToTime timeInterval = new FromToTime()
+            {From = new DateTime(2020, 06, 23),
+            To = new DateTime(2020, 06, 24)};
+
+        /*using (var client = new HttpClient())
+        {
+        var res = client.GetFromJsonAsync("api/oee/availability/1/10/timeFilter", 
+            new StringContent(JsonConvert.SerializeObject(timeInterval)));
+
+        try
+        {
+            res.Result.EnsureSuccessStatusCode();
+        } 
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        } */  
+        
+        availabilityList = await Http.GetFromJsonAsync<List<Availability>>("api/oee/availability/1/10/20200623T0000Z/20200624T0000Z");
+        dataDowntime = CalculateDowntime(availabilityList);
+
+        //lineSet.Data.Clear();
+        //_config.Data.Datasets.Clear();
+        //lineSet.Data = new ;
+        //_config.Data.Datasets.Add(lineSet);
+
+        StateHasChanged();  
+    }
+
+    public class DataPoints
+    {
+        private int _xAxis;
+        public int xAxis
+        {
+            get { return _xAxis; }
+            set { _xAxis = value; }
+        }
+        
+        private int _yAxis;
+        public int yAxis
+        {
+            get { return _yAxis; }
+            set { _yAxis = value; }
+        }
+        
+    }
+
+    public class FromToTime
+        {
+            private DateTime _from;
+            public DateTime From
+            {
+                get { return _from; }
+                set { _from = value; }
+            }
+            
+            private DateTime _to;
+            public DateTime To
+            {
+                get { return _to; }
+                set { _to = value; }
+            }
+        }
+
+    private double[] CalculateDowntime(List<Availability> availabilityList)
+    {
+        double[] output = new double[] {0,0};
+
+        // Sorting should not be necessary 
+        //availabilityList.Sort(delegate(Availability x, Availability y)
+        //{
+        //    if(x.EventTime == null && y.EventTime == null) return 0;
+        //    else if (x.EventTime == null) return -1;
+        //    else if (y.EventTime == null) return 1;
+        //    else return x.EventTime.CompareTo(y.EventTime);
+        //});
+
+        double uptime = 0;
+        double downtime = 0;
+        double prevTicks = availabilityList.First().EventTime.Ticks;
+
+        double totalTicks = (availabilityList.First().EventTime.Ticks - availabilityList.Last().EventTime.Ticks);
+
+        foreach (Availability item in availabilityList)
+        {
+            if(item.Available == false)
+            {
+                downtime += prevTicks - item.EventTime.Ticks;
+            }
+            else
+            {
+                uptime += prevTicks - item.EventTime.Ticks;
+            }
+
+            prevTicks = item.EventTime.Ticks;
+        }
+
+        output[0] = ((uptime) / totalTicks * 100 );
+        output[1] = ((downtime) / totalTicks * 100);
+
+        return output;
+    }
+  
+    public bool IsConnected =>  
+        hubConnection.State == HubConnectionState.Connected;  
+  
+    public void Dispose()  
+    {  
+        _ = hubConnection.DisposeAsync();  
+    }  
+}

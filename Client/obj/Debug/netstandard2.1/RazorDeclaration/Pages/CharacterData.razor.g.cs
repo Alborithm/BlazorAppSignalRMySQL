@@ -77,6 +77,20 @@ using BlazorSignalRApp.Client.Shared;
 #line hidden
 #nullable disable
 #nullable restore
+#line 10 "/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/_Imports.razor"
+using Blazor.Extensions.Canvas;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/_Imports.razor"
+using ChartJs.Blazor;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 3 "/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/Pages/CharacterData.razor"
 using BlazorSignalRApp.Shared;
 

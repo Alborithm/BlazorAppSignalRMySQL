@@ -14,6 +14,7 @@ using BlazorSignalRApp.Shared.Models.OEE;
 using System.Net.Http;
 using System.Net;
 using System.Net.Http.Json;
+using System.Globalization;
 
 namespace BlazorSignalRApp.Server.Controllers
 {
@@ -161,6 +162,47 @@ namespace BlazorSignalRApp.Server.Controllers
             }
         }
 
+        // GET: api/oee/Availability/1/10/20140302T0003Z/20140302T1603Z
+        [HttpGet("{lineId}/{opNumber}/{fromTimeString}/{toTimeString}")]
+        public ActionResult<IEnumerable<Availability>> GetAvailabilityOfOperationTimeRane(
+            int lineId, int opNumber ,string fromTimeString, string toTimeString
+        )
+        {
+            List<Availability> availabilityList;
+
+            FromToTime fromToTime = new FromToTime(fromTimeString, toTimeString);
+
+            if (fromToTime.From >= fromToTime.To)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                response.ReasonPhrase = "Request unsuccesful";
+                return NotFound("'To' value must be higher than 'From' value");
+            }
+
+
+
+            using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
+            {
+                var output = con.Query<Availability>("CALL SpGetAvailabilityTableOfOperationByTime(" +
+                    $"{lineId}, {opNumber}, " +
+                    String.Format("{0}, ", ParseDateToMySqlTimestampFunc(fromToTime.From)) +
+                    String.Format("{0});", ParseDateToMySqlTimestampFunc(fromToTime.To)));
+
+                availabilityList = output.AsList();
+            }
+
+            if (availabilityList.Count != 0)
+            {
+                return Ok(availabilityList);
+            }
+            else
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.ReasonPhrase = "Request unsuccesful";
+                return NotFound("Procedure call did not return a value");
+            }
+        }
+
         private string ParseDateToMySqlTimestampFunc(DateTime time)
         {
             string output = $"TIMESTAMP('{time.Year}-{time.Month}-{time.Day} {time.Hour}:{time.Minute}:{time.Second}')";
@@ -191,36 +233,7 @@ namespace BlazorSignalRApp.Server.Controllers
             //return entity;
         }
 */
-        [HttpGet("realtime")]
-        //[Route("api/oee/availability/realtime")]
-        public ActionResult<List<RealTime>> GetAvailabilityRealTime()
-        {
-            List<RealTime> entity = GetRealTimeList();
-            if  (entity != null)
-            {
-                return Ok(entity);
-            }
-            else
-            {
-                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
-                response.ReasonPhrase = "No table found";
-                return NotFound("Table OeeRealTime not found");
-            }
-        }
-
-        private List<RealTime> GetRealTimeList()
-        {
-            List<RealTime> output;
-            
-            string query = "SELECT * FROM `MessureDB`.`OeeRealTime`;";
-
-            using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
-            {
-                output = con.Query<RealTime>(query).AsList();
-            }
-
-            return output;
-        }
+        
 // Post and Put methods not needed right now
 /*
         [HttpPost]
@@ -367,6 +380,35 @@ namespace BlazorSignalRApp.Server.Controllers
             {
                 get { return _to; }
                 set { _to = value; }
+            }
+
+            public FromToTime()
+            {
+
+            }
+
+            public FromToTime(string fromTime, string toTime)
+            {
+                this.From = BuildDateTimeFromYAFormat(fromTime);
+                this.To = BuildDateTimeFromYAFormat(toTime);
+            }
+
+            // Build datetime with a string with forma yyyyMMddTHHmmZ example. 20200702T2104Z
+            private DateTime BuildDateTimeFromYAFormat(string dateString)
+            {
+                System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(@"^\d{4}\d{2}\d{2}T\d{2}\d{2}Z$");
+                if (!r.IsMatch(dateString))
+                {
+                    throw new FormatException(
+                        string.Format("{0} is not the correct format. Should be yyyyMMddTHHmmZ", dateString)); 
+                }
+                //Gets Time Valeu on UTC
+                //DateTime dt = DateTime.ParseExact(dateString, "yyyyMMddThhmmZ", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+                
+                //GetsTime value local
+                DateTime dt = DateTime.ParseExact(dateString, "yyyyMMddTHHmmZ", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+
+                return dt;
             }
         }
     }

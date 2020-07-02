@@ -1,4 +1,6 @@
 ﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="_content/Blazor.Extensions.Canvas" Path="/Users/gerardoalbor/.nuget/packages/blazor.extensions.canvas/1.1.0-preview1/build/../staticwebassets/" />
+  <ContentRoot BasePath="_content/ChartJs.Blazor" Path="/Users/gerardoalbor/.nuget/packages/chartjs.blazor/1.1.0/build/../staticwebassets/" />
   <ContentRoot BasePath="/" Path="/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/wwwroot/" />
   <ContentRoot BasePath="/" Path="/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/bin/Debug/netstandard2.1/wwwroot/" />
 </StaticWebAssets>

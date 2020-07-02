@@ -112,3 +112,6 @@
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Server/bin/Debug/netcoreapp3.1/Dapper.dll
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Server/bin/Debug/netcoreapp3.1/MySqlConnector.dll
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Server/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Server/bin/Debug/netcoreapp3.1/Blazor.Extensions.Canvas.JS.dll
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Server/bin/Debug/netcoreapp3.1/Blazor.Extensions.Canvas.dll
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Server/bin/Debug/netcoreapp3.1/ChartJs.Blazor.dll
