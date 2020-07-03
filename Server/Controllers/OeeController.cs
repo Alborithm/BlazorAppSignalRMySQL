@@ -109,6 +109,64 @@ namespace BlazorSignalRApp.Server.Controllers
             }
         }
 
+        [HttpPut("{lineId}/{opNumber}")]
+        public HttpResponseMessage PutRealTimeDataOnOperation(int lineId, int OpNumber)
+        {
+            string query = $"CALL SpUpdateOeeRealTimeFromEntity({OpNumber},{lineId});";
+
+            try
+            {
+                using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
+                {
+                    con.Execute(query);
+                }
+
+                var response = new HttpResponseMessage(HttpStatusCode.OK);
+
+                _hubContext.Clients.All.SendAsync("ReceiveMessage");                
+                
+                return response;
+                
+            }
+            catch (System.Exception ex)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                response.ReasonPhrase = ex.Message;
+
+                throw;
+            }
+        }
+
+        [HttpPut]
+        public HttpResponseMessage PutRealTimeDataOnAll()
+        {
+            string query = $"CALL SpUpdateOeeRealTimeFromEntity({1},{10}); \n" +
+                $"CALL SpUpdateOeeRealTimeFromEntity({1},{20}); \n" +
+                $"CALL SpUpdateOeeRealTimeFromEntity({2},{10}); ";
+
+            try
+            {
+                using(MySqlConnection con = new MySqlConnection(_connectionString.MySQL))
+                {
+                    con.Execute(query);
+                }
+
+                var response = new HttpResponseMessage(HttpStatusCode.OK);
+
+                _hubContext.Clients.All.SendAsync("ReceiveMessage");                
+                
+                return response;
+                
+            }
+            catch (System.Exception ex)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                response.ReasonPhrase = ex.Message;
+
+                throw;
+            }
+        }
+
         public class FromToDates
         {
             private DateTime _from;

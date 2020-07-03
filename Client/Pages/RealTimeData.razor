@@ -1,0 +1,108 @@
+@page "/realTimeData"
+
+@using BlazorSignalRApp.Shared.Models.OEE;
+@using Microsoft.AspNetCore.SignalR.Client;
+@using Blazor.Extensions;
+@inject NavigationManager NavigationManager   
+@inject HttpClient Http
+
+@inherits RealTimeDashboardComponent
+
+<h1>Availability List</h1>
+
+<p>Gets the entire list on availability.</p>
+
+@if (EquipmentList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <BECanvas Width="300" Height="150" @ref="_canvasList[0]" ></BECanvas>
+            </div>
+            <div class="col-4">
+                <BECanvas Width="300" Height="150" @ref="_canvasList[1]" ></BECanvas>
+            </div>
+            <div class="col-4">
+                <BECanvas Width="300" Height="150" @ref="_canvasList[2]" ></BECanvas>
+            </div>
+        </div>
+    </div>
+    <div>
+    <table class="table">
+        <thead> 
+            <tr>
+                <th>Department</th>
+                <th>Area</th>
+                <th>Line</th>
+                <th>Operation</th>
+                <th>Available</th>
+                <th>Fail Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var field in EquipmentList)
+            {
+                <tr>
+                    <td>@field.Department</td>
+                    <td>@field.Area</td>
+                    <td>@field.LineName</td>
+                    <td>@field.OpName</td>
+                    <td>@field.Available</td>
+                    <td>@field.FailCode</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+}
+
+@code {
+    private List<RealTime> EquipmentList;
+    private HubConnection hubConnection;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        hubConnection = new HubConnectionBuilder()  
+            .WithUrl(NavigationManager.ToAbsoluteUri("/oeeHub"))  
+            .Build();  
+  
+        hubConnection.On("ReceiveMessage", () =>  
+        {  
+            CallLoadData();  
+            StateHasChanged();  
+        });  
+  
+        await hubConnection.StartAsync();  
+  
+        await LoadData();  
+    }
+
+    private void CallLoadData()   
+    {  
+        Task.Run(async () =>  
+        {  
+            await LoadData();  
+        });  
+    }  
+  
+    protected async Task LoadData()  
+    {  
+        EquipmentList = await Http.GetFromJsonAsync<List<RealTime>>("api/oee/realTime");
+        equipmentList= EquipmentList;
+        
+        StateHasChanged();  
+    }  
+  
+    public bool IsConnected =>  
+        hubConnection.State == HubConnectionState.Connected;  
+  
+    public void Dispose()  
+    {  
+        _ = hubConnection.DisposeAsync();  
+    }  
+}
