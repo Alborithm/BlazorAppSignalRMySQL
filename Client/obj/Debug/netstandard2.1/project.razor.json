@@ -9,6 +9,55 @@
     "TagHelpers": [
       {
         "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.CanvasComponent",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "CanvasComponent",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.CanvasComponent"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.CanvasComponent",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorSignalRApp.Client.Pages.CanvasComponent",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.CanvasComponent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
         "Name": "BlazorSignalRApp.Client.Pages.RealTimeDashboardComponent",
         "AssemblyName": "BlazorSignalRApp.Client",
         "Documentation": null,
@@ -53,6 +102,153 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "BlazorSignalRApp.Client.Pages.RealTimeDashboardComponent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityChart",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "AvailabilityChart",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityChart"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityChart",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorSignalRApp.Client.Pages.AvailabilityChart",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityChart",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityData",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "AvailabilityData",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityData"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityData",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorSignalRApp.Client.Pages.AvailabilityData",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityData",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityStepped",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "AvailabilityStepped",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityStepped"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityStepped",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorSignalRApp.Client.Pages.AvailabilityStepped",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityStepped",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -303,153 +499,6 @@
       },
       {
         "Kind": "Components.Component",
-        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityStepped",
-        "AssemblyName": "BlazorSignalRApp.Client",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "AvailabilityStepped",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityStepped"
-        }
-      },
-      {
-        "Kind": "Components.Component",
-        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityStepped",
-        "AssemblyName": "BlazorSignalRApp.Client",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorSignalRApp.Client.Pages.AvailabilityStepped",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityStepped",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "Kind": "Components.Component",
-        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityChart",
-        "AssemblyName": "BlazorSignalRApp.Client",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "AvailabilityChart",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityChart"
-        }
-      },
-      {
-        "Kind": "Components.Component",
-        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityChart",
-        "AssemblyName": "BlazorSignalRApp.Client",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorSignalRApp.Client.Pages.AvailabilityChart",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityChart",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "Kind": "Components.Component",
-        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityData",
-        "AssemblyName": "BlazorSignalRApp.Client",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "AvailabilityData",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityData"
-        }
-      },
-      {
-        "Kind": "Components.Component",
-        "Name": "BlazorSignalRApp.Client.Pages.AvailabilityData",
-        "AssemblyName": "BlazorSignalRApp.Client",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorSignalRApp.Client.Pages.AvailabilityData",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorSignalRApp.Client.Pages.AvailabilityData",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "Kind": "Components.Component",
         "Name": "BlazorSignalRApp.Client.Pages.RealTimeDashboard",
         "AssemblyName": "BlazorSignalRApp.Client",
         "Documentation": null,
@@ -494,6 +543,55 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "BlazorSignalRApp.Client.Pages.RealTimeDashboard",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.Canvas",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Canvas",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.Canvas"
+        }
+      },
+      {
+        "Kind": "Components.Component",
+        "Name": "BlazorSignalRApp.Client.Pages.Canvas",
+        "AssemblyName": "BlazorSignalRApp.Client",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorSignalRApp.Client.Pages.Canvas",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorSignalRApp.Client.Pages.Canvas",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -18310,6 +18408,11 @@
     {
       "FilePath": "/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/Pages/FetchData.razor",
       "TargetPath": "Pages\\FetchData.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/Pages/Canvas.razor",
+      "TargetPath": "Pages\\Canvas.razor",
       "FileKind": "component"
     },
     {
