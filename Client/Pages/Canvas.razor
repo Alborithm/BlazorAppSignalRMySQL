@@ -4,4 +4,25 @@
 
 @inherits CanvasComponent
 
-<BECanvas Width="250" Height="200" @ref="_canvasReference"></BECanvas>
+<div>
+    <p>Hola Mundo!</p>
+</div>
+
+<div class="container">
+    <div class="row">
+    @{int i = 0;}
+    @foreach (var item in _dashboardData)
+    {
+            <div class="col">
+                <BECanvas Width="250" Height="200" @ref="_canvasReference"></BECanvas>
+            </div>
+        //string reference = $"_canvasReferenceList[{i}]";
+        //<BECanvas Width="250" Height="200" @ref="_canvasReferenceList[i]"></BECanvas>
+        i++;
+    }
+    @foreach (var item in _canvasReferenceList)
+    {
+        
+    }
+    </div>
+</div>

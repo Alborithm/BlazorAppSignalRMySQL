@@ -11,18 +11,124 @@ namespace BlazorSignalRApp.Client.Pages
     public class CanvasComponent : ComponentBase
     {
         private Canvas2DContext _context;
-        protected BECanvasComponent _canvasReference;
+        protected BECanvasComponent _canvasReference { set => _canvasReferenceList.Add(value);}
+
+        protected List<BECanvasComponent> _canvasReferenceList = new List<BECanvasComponent>();
+
+        // https://github.com/dotnet/aspnetcore/issues/13358 capture references in a loop
+        protected List<RealTimeDashboardData> _dashboardData; //= new List<RealTimeDashboardData>(); 
+
+        protected override void OnInitialized()
+        {
+            _dashboardData = new List<RealTimeDashboardData>();
+            _dashboardData.Add(new RealTimeDashboardData(){
+                LineName = "Line A",
+                OperationName = "Operation 10",
+                Availability = 0.87,
+                TimeToRepair = "00:00:00",
+                TotalDowntime = "01:09:48",
+                Available = true
+            });
+            _dashboardData.Add(new RealTimeDashboardData(){
+                LineName = "Line A",
+                OperationName = "Operation 20",
+                Availability = 0.64,
+                TimeToRepair = "00:24:20",
+                TotalDowntime = "02:52:03",
+                Available = false
+            });
+            _dashboardData.Add(new RealTimeDashboardData(){
+                LineName = "Line A",
+                OperationName = "Operation 30",
+                Availability = 0.58,
+                TimeToRepair = "00:00:00",
+                TotalDowntime = "03:38:30",
+                Available = true
+            });
+            _dashboardData.Add(new RealTimeDashboardData(){
+                LineName = "Line B",
+                OperationName = "Operation 10",
+                Availability = 0.92,
+                TimeToRepair = "00:05:49",
+                TotalDowntime = "00:31:08",
+                Available = false
+            });
+            _dashboardData.Add(new RealTimeDashboardData(){
+                LineName = "Line B",
+                OperationName = "Operation 20",
+                Availability = 0.71,
+                TimeToRepair = "00:00:00",
+                TotalDowntime = "02:32:21",
+                Available = true
+            });
+
+            //_canvasReferenceList = new List<BECanvasComponent>() {null,null, null, null, null};
+        }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            this._context = await this._canvasReference.CreateCanvas2DAsync();
+            //this._context = await this._canvasReference.CreateCanvas2DAsync();
 
-            string LineName = "Line X";
-            string OperationName = "Operation Y";
-            double Availability = 0.85;
-            string TimeToRepair = "00:00:00";
-            string TotalDowntime = "00:00:00";
-            bool Available = false;
+
+            int i= 0;
+            //foreach (RealTimeDashboardData item in _dashboardData)
+            //{
+                //_canvasReferenceList.Add(null);
+
+                //this._context = await _canvasReferenceList[i].CreateCanvas2DAsync();
+
+                //await DrawAvailabilityCardAsync(item);
+                //i++;
+            //}
+            //this._canvasReferenceList.Add(null);
+            //this._context = await _canvasReferenceList[0].CreateCanvas2DAsync();
+            
+            // This last one works still seems not to be the correct way to do it.
+            //this._canvasReferenceList = new List<BECanvasComponent>() {null};
+
+            // LETS TRY THIS
+            //this._context = await this._canvasReference.CreateCanvas2DAsync();
+            //await DrawAvailabilityCardAsync(_dashboardData[2]);
+            this._context = await this._canvasReferenceList[0].CreateCanvas2DAsync();
+            await DrawAvailabilityCardAsync(_dashboardData[0]);
+
+            this._context = await this._canvasReferenceList[1].CreateCanvas2DAsync();
+            await DrawAvailabilityCardAsync(_dashboardData[1]);
+
+            this._context = await this._canvasReferenceList[2].CreateCanvas2DAsync();
+            await DrawAvailabilityCardAsync(_dashboardData[2]);
+
+            this._context = await this._canvasReferenceList[3].CreateCanvas2DAsync();
+            await DrawAvailabilityCardAsync(_dashboardData[3]);
+
+            this._context = await this._canvasReferenceList[4].CreateCanvas2DAsync();
+            await DrawAvailabilityCardAsync(_dashboardData[4]);
+
+            //foreach (RealTimeDashboardData item in _dashboardData)
+            //{
+            //    this._context = await this._canvasReferenceList[i].CreateCanvas2DAsync();
+
+              //  await DrawAvailabilityCardAsync(item);
+            //}
+
+        }
+
+        protected async Task DrawAvailabilityCardAsync(
+            RealTimeDashboardData data)
+        {
+            //if (canvasComponent is null)
+            //{
+            //    throw new ArgumentNullException(nameof(canvasComponent));
+            //}
+
+            //this._context = await canvasComponent.CreateCanvas2DAsync();
+            
+            string LineName = data.LineName;
+            string OperationName = data.OperationName;
+            double Availability = data.Availability;
+            string TimeToRepair = data.TimeToRepair;
+            string TotalDowntime = data.TotalDowntime;
+            bool Available = data.Available;
 
             // Canvas margin
             await this._context.RectAsync(0,0,250,200);
@@ -124,6 +230,52 @@ namespace BlazorSignalRApp.Client.Pages
             await this._context.FillTextAsync("A = ", 15, 160);
             await this._context.FillTextAsync( (Availability*100).ToString() + " %", 98, 175); 
 
+        }
+
+        public class RealTimeDashboardData
+        {
+            private string _lineName;
+            public string LineName
+            {
+                get { return _lineName; }
+                set { _lineName = value; }
+            }
+            
+            private string _operationName;
+            public string OperationName
+            {
+                get { return _operationName; }
+                set { _operationName = value; }
+            }
+            
+            private double _availability;
+            public double Availability
+            {
+                get { return _availability; }
+                set { _availability = value; }
+            }
+            
+            private string _timeToRepair;
+            public string TimeToRepair
+            {
+                get { return _timeToRepair; }
+                set { _timeToRepair = value; }
+            }
+            
+            private string _totalDowntime;
+            public string TotalDowntime
+            {
+                get { return _totalDowntime; }
+                set { _totalDowntime = value; }
+            }
+            
+            private bool _available;
+            public bool Available
+            {
+                get { return _available; }
+                set { _available = value; }
+            }
+            
         }
     }
 }
