@@ -18,6 +18,24 @@ namespace BlazorSignalRApp.Client.Pages
         // https://github.com/dotnet/aspnetcore/issues/13358 capture references in a loop
         protected List<RealTimeDashboardData> _dashboardData; //= new List<RealTimeDashboardData>(); 
 
+
+        // Drawing vairables Colors
+        private string RealTimePrimaryGreen = "#2ba745";
+        private string RealTimeSecondaryGreen = "green";
+        private string RealTimePrimaryRed = "#dc3645";
+        private string RealTimeSecondaryRed = "#cc0000";
+        private string RealTimeFontColor = "white";
+        private string FillBackgroundColor = "#d3d3d3";
+        private string FillGreen = "#32cd32";
+        private string FillYellow = "yellow";
+        private string FillRed = "red";
+
+        // Drawing variables fonts
+        private string TimerLabelsFont = "16px Helvetica";
+        private string TimerCountersFont = "25px Helvetica";
+        private string RealTimeLabesFont = "25px Helvetica";
+        private string AvailabilityLabelFont = "25px Helvetica";
+
         protected override void OnInitialized()
         {
             _dashboardData = new List<RealTimeDashboardData>();
@@ -61,67 +79,33 @@ namespace BlazorSignalRApp.Client.Pages
                 TotalDowntime = "02:32:21",
                 Available = true
             });
+            _dashboardData.Add(new RealTimeDashboardData(){
+                LineName = "Line C",
+                OperationName = "Operation 10",
+                Availability = 0.35,
+                TimeToRepair = "03:11:42",
+                TotalDowntime = "05:18:04",
+                Available = false
+            });
 
-            //_canvasReferenceList = new List<BECanvasComponent>() {null,null, null, null, null};
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            //this._context = await this._canvasReference.CreateCanvas2DAsync();
+            int i = 0;
+            foreach (RealTimeDashboardData item in _dashboardData)
+            {
+                this._context = await this._canvasReferenceList[i].CreateCanvas2DAsync();
+                await DrawAvailabilityCardAsync(item);
 
-
-            int i= 0;
-            //foreach (RealTimeDashboardData item in _dashboardData)
-            //{
-                //_canvasReferenceList.Add(null);
-
-                //this._context = await _canvasReferenceList[i].CreateCanvas2DAsync();
-
-                //await DrawAvailabilityCardAsync(item);
-                //i++;
-            //}
-            //this._canvasReferenceList.Add(null);
-            //this._context = await _canvasReferenceList[0].CreateCanvas2DAsync();
-            
-            // This last one works still seems not to be the correct way to do it.
-            //this._canvasReferenceList = new List<BECanvasComponent>() {null};
-
-            // LETS TRY THIS
-            //this._context = await this._canvasReference.CreateCanvas2DAsync();
-            //await DrawAvailabilityCardAsync(_dashboardData[2]);
-            this._context = await this._canvasReferenceList[0].CreateCanvas2DAsync();
-            await DrawAvailabilityCardAsync(_dashboardData[0]);
-
-            this._context = await this._canvasReferenceList[1].CreateCanvas2DAsync();
-            await DrawAvailabilityCardAsync(_dashboardData[1]);
-
-            this._context = await this._canvasReferenceList[2].CreateCanvas2DAsync();
-            await DrawAvailabilityCardAsync(_dashboardData[2]);
-
-            this._context = await this._canvasReferenceList[3].CreateCanvas2DAsync();
-            await DrawAvailabilityCardAsync(_dashboardData[3]);
-
-            this._context = await this._canvasReferenceList[4].CreateCanvas2DAsync();
-            await DrawAvailabilityCardAsync(_dashboardData[4]);
-
-            //foreach (RealTimeDashboardData item in _dashboardData)
-            //{
-            //    this._context = await this._canvasReferenceList[i].CreateCanvas2DAsync();
-
-              //  await DrawAvailabilityCardAsync(item);
-            //}
+                i++;
+            }
 
         }
 
         protected async Task DrawAvailabilityCardAsync(
             RealTimeDashboardData data)
         {
-            //if (canvasComponent is null)
-            //{
-            //    throw new ArgumentNullException(nameof(canvasComponent));
-            //}
-
-            //this._context = await canvasComponent.CreateCanvas2DAsync();
             
             string LineName = data.LineName;
             string OperationName = data.OperationName;
@@ -133,8 +117,8 @@ namespace BlazorSignalRApp.Client.Pages
             // Canvas margin
             await this._context.RectAsync(0,0,250,200);
             
-            // Labels Repair times
-            await this._context.SetFontAsync("16px Helvetica");
+            // Timer Labels
+            await this._context.SetFontAsync(TimerLabelsFont);
             await this._context.FillTextAsync("Time to Repair", 5, 18);
             await this._context.FillTextAsync("Total Downtime", 130, 18);
 
@@ -146,7 +130,7 @@ namespace BlazorSignalRApp.Client.Pages
             await this._context.StrokeAsync();
 
             // Counter Numbers
-            await this._context.SetFontAsync("25px Helvetica");
+            await this._context.SetFontAsync(TimerCountersFont);
             await this._context.FillTextAsync(TimeToRepair, 20, 45);
             await this._context.FillTextAsync(TotalDowntime, 140, 45);
 
@@ -163,10 +147,10 @@ namespace BlazorSignalRApp.Client.Pages
             switch (Available)
             {
                 case true:
-                    await this._context.SetFillStyleAsync("green");
+                    await this._context.SetFillStyleAsync(RealTimeSecondaryGreen);
                     break;
                 case false:
-                    await this._context.SetFillStyleAsync("#cc0000");
+                    await this._context.SetFillStyleAsync(RealTimeSecondaryRed);
                     break;
             }
             await this._context.FillAsync();
@@ -179,24 +163,24 @@ namespace BlazorSignalRApp.Client.Pages
             switch (Available)
             {
                 case true:
-                    await this._context.SetFillStyleAsync("#2ba745");
+                    await this._context.SetFillStyleAsync(RealTimePrimaryGreen);
                     break;
                 case false:
-                    await this._context.SetFillStyleAsync("#dc3645");
+                    await this._context.SetFillStyleAsync(RealTimePrimaryRed);
                     break;
             }
             await this._context.FillAsync();
 
             // Operation Data
-            await this._context.SetFontAsync("25px Helvetica");
-            await this._context.SetFillStyleAsync("white");
+            await this._context.SetFontAsync(RealTimeLabesFont);
+            await this._context.SetFillStyleAsync(RealTimeFontColor);
             await this._context.FillTextAsync(LineName, 10, 85);
             await this._context.FillTextAsync(OperationName, 10, 110);
 
             // Arc representation of availability
             await this._context.BeginPathAsync();
             await this._context.MoveToAsync(65,180);
-            await this._context.SetFillStyleAsync("gray");
+            await this._context.SetFillStyleAsync(FillBackgroundColor);
             await this._context.ArcAsync(125, 180, 60, Math.PI, 0, false);
             await this._context.ArcAsync(125, 180, 40, 0, Math.PI, true);
             await this._context.ClosePathAsync();
@@ -206,15 +190,15 @@ namespace BlazorSignalRApp.Client.Pages
             // Select colors for graph depending on Availability
             if (Availability < 0.60) 
             {
-                await this._context.SetFillStyleAsync("red");
+                await this._context.SetFillStyleAsync(FillRed);
             }
             else if(Availability < 0.85)
             {
-                await this._context.SetFillStyleAsync("yellow");
+                await this._context.SetFillStyleAsync(FillYellow);
             }
             else
             {
-                await this._context.SetFillStyleAsync("green");
+                await this._context.SetFillStyleAsync(FillGreen);
             }
 
             // fill the arc with availability
@@ -226,7 +210,8 @@ namespace BlazorSignalRApp.Client.Pages
             await this._context.FillAsync();
             
             // Text representation of availability
-            await this._context.SetFillStyleAsync("white");
+            await this._context.SetFillStyleAsync(RealTimeFontColor);
+            await this._context.SetFontAsync(AvailabilityLabelFont);
             await this._context.FillTextAsync("A = ", 15, 160);
             await this._context.FillTextAsync( (Availability*100).ToString() + " %", 98, 175); 
 

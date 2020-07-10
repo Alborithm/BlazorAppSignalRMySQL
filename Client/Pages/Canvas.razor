@@ -5,7 +5,7 @@
 @inherits CanvasComponent
 
 <div>
-    <p>Hola Mundo!</p>
+    <h3>Real Time Dashboard</h3>
 </div>
 
 <div class="container">
@@ -13,16 +13,10 @@
     @{int i = 0;}
     @foreach (var item in _dashboardData)
     {
-            <div class="col">
+            <div class="col text-center">
                 <BECanvas Width="250" Height="200" @ref="_canvasReference"></BECanvas>
             </div>
-        //string reference = $"_canvasReferenceList[{i}]";
-        //<BECanvas Width="250" Height="200" @ref="_canvasReferenceList[i]"></BECanvas>
         i++;
-    }
-    @foreach (var item in _canvasReferenceList)
-    {
-        
     }
     </div>
 </div>
