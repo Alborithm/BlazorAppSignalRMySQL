@@ -5,18 +5,41 @@ using System.Threading.Tasks;
 using BlazorSignalRApp.Shared.Models.OEE;
 using System.Collections.Generic;
 using System;
+using BlazorSignalRApp.Shared.Models.OEE;
 
 namespace BlazorSignalRApp.Client.Pages
 {
     public class CanvasComponent : ComponentBase
     {
         private Canvas2DContext _context;
-        protected BECanvasComponent _canvasReference { set => _canvasReferenceList.Add(value);}
+        protected int i;
+        protected BECanvasComponent _canvasReference 
+        { 
+            set
+            {
+                //_canvasReferenceList[i] = value;
+                /*
+                if (_canvasReferenceList[i] != null)
+                {
+                    _canvasReferenceList[i] = value;
+                }
+                else
+                {
+                    _canvasReferenceList.Add(value);
+                }*/
+                if (_canvasReferenceList.Count == _dashboardData.Count)
+                {
+                    //_canvasReferenceList[i] = value; 
+                }
+
+                this._canvasReferenceList.Add(value);
+            }
+        }
 
         protected List<BECanvasComponent> _canvasReferenceList = new List<BECanvasComponent>();
 
         // https://github.com/dotnet/aspnetcore/issues/13358 capture references in a loop
-        protected List<RealTimeDashboardData> _dashboardData; //= new List<RealTimeDashboardData>(); 
+        protected List<RealTime> _dashboardData;
 
 
         // Drawing vairables Colors
@@ -24,6 +47,7 @@ namespace BlazorSignalRApp.Client.Pages
         private string RealTimeSecondaryGreen = "green";
         private string RealTimePrimaryRed = "#dc3645";
         private string RealTimeSecondaryRed = "#cc0000";
+        private string TimerLabelsColor = "black";
         private string RealTimeFontColor = "white";
         private string FillBackgroundColor = "#d3d3d3";
         private string FillGreen = "#32cd32";
@@ -38,7 +62,7 @@ namespace BlazorSignalRApp.Client.Pages
 
         protected override void OnInitialized()
         {
-            _dashboardData = new List<RealTimeDashboardData>();
+            /*_dashboardData = new List<RealTimeDashboardData>();
             _dashboardData.Add(new RealTimeDashboardData(){
                 LineName = "Line A",
                 OperationName = "Operation 10",
@@ -86,32 +110,35 @@ namespace BlazorSignalRApp.Client.Pages
                 TimeToRepair = "03:11:42",
                 TotalDowntime = "05:18:04",
                 Available = false
-            });
+            });*/
 
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            int i = 0;
-            foreach (RealTimeDashboardData item in _dashboardData)
+            int j = 0;
+            foreach (RealTime item in this._dashboardData)
             {
-                this._context = await this._canvasReferenceList[i].CreateCanvas2DAsync();
-                await DrawAvailabilityCardAsync(item);
+                this._context = await this._canvasReferenceList[j].CreateCanvas2DAsync();
 
-                i++;
+                //Clear canvas
+                await this._context.ClearRectAsync(0, 0, _canvasReferenceList[j].Width, _canvasReferenceList[j].Height);
+                await this.DrawAvailabilityCardAsync(item);
+
+                j++;
             }
 
         }
 
         protected async Task DrawAvailabilityCardAsync(
-            RealTimeDashboardData data)
+            RealTime data)
         {
-            
+            //Random rnd = new Random();
             string LineName = data.LineName;
-            string OperationName = data.OperationName;
-            double Availability = data.Availability;
-            string TimeToRepair = data.TimeToRepair;
-            string TotalDowntime = data.TotalDowntime;
+            string OperationName = data.OpName;
+            double Availability = 0.75;
+            string TimeToRepair = "00:00:00";
+            string TotalDowntime = "00:00:00";
             bool Available = data.Available;
 
             // Canvas margin
@@ -119,7 +146,8 @@ namespace BlazorSignalRApp.Client.Pages
             
             // Timer Labels
             await this._context.SetFontAsync(TimerLabelsFont);
-            await this._context.FillTextAsync("Time to Repair", 5, 18);
+            await this._context.SetFillStyleAsync(TimerLabelsColor);
+            await this._context.FillTextAsync("Downtime", 5, 18);
             await this._context.FillTextAsync("Total Downtime", 130, 18);
 
             // Time counters
@@ -216,7 +244,7 @@ namespace BlazorSignalRApp.Client.Pages
             await this._context.FillTextAsync( (Availability*100).ToString() + " %", 98, 175); 
 
         }
-
+/*
         public class RealTimeDashboardData
         {
             private string _lineName;
@@ -260,7 +288,7 @@ namespace BlazorSignalRApp.Client.Pages
                 get { return _available; }
                 set { _available = value; }
             }
-            
         }
+*/
     }
 }

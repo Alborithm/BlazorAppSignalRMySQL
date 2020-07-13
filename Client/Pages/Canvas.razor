@@ -1,22 +1,95 @@
 @page "/canvas"
 
+@using BlazorSignalRApp.Shared.Models.OEE
+@using Microsoft.AspNetCore.SignalR.Client
 @using Blazor.Extensions
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
 
 @inherits CanvasComponent
 
 <div>
     <h3>Real Time Dashboard</h3>
 </div>
-
-<div class="container">
-    <div class="row">
-    @{int i = 0;}
-    @foreach (var item in _dashboardData)
-    {
-            <div class="col text-center">
-                <BECanvas Width="250" Height="200" @ref="_canvasReference"></BECanvas>
-            </div>
-        i++;
-    }
+@if (_dashboardData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+        @{i = 0;
+        //if (_canvasReferenceList.Count >= 1)
+        //{
+        //    _canvasReferenceList.Clear();
+        //    _canvasReferenceList.TrimExcess();
+        //}
+        }
+        @foreach (var item in _dashboardData)
+        {
+                <div class="col text-center">
+                    <BECanvas Width="250" Height="200" @ref="_canvasReference"></BECanvas>
+                </div>
+                i++;
+        }
+        </div>
     </div>
-</div>
+}
+
+
+@code{
+    private List<RealTime> EquipmentList;
+    private HubConnection hubConnection;
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()  
+            .WithUrl(NavigationManager.ToAbsoluteUri("/oeeHub"))  
+            .Build();  
+  
+        hubConnection.On("ReceiveMessage", () =>  
+        {  
+            CallLoadData();  
+            StateHasChanged();  
+        });
+
+        await hubConnection.StartAsync();
+
+        await LoadData();
+
+        //InitializeCanvasReferenceList();
+    }
+
+    private void CallLoadData()
+    {
+        Task.Run(async () =>
+        {
+            await LoadData();
+        });
+    }
+
+    protected async Task LoadData()
+    {
+        EquipmentList = await Http.GetFromJsonAsync<List<RealTime>>("api/oee/realTime");
+        _dashboardData = EquipmentList;
+
+        StateHasChanged();
+    }
+
+    protected void InitializeCanvasReferenceList()
+    {
+        foreach (var item in _dashboardData)
+        {
+            _canvasReferenceList.Add(null);
+        }
+    }
+
+    public bool IsConnected =>  
+        hubConnection.State == HubConnectionState.Connected;  
+  
+    public void Dispose()  
+    {  
+        _ = hubConnection.DisposeAsync();  
+    }  
+}

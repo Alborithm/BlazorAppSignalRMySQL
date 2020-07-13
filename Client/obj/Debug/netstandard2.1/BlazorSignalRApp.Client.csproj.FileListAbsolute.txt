@@ -472,6 +472,6 @@
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/Razor/Pages/Canvas.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/fwzKsR3RjUHArX1zzvExbYT91ujncvzNRC2ls0_9nzo=.hash
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/AOKpeBqBOO_ejjHf0fuMQrBeWpeR3AO8aCdTQHeiZaI=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/txErcg37t4KTRWUr7CgEf_fEa89AWmsaxyNTpX5TTew=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/sxCpilwhHHd03lsmJnUusbOAK1BWWkPyk7WvOB_YvYI=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/nV7z_3T1qOeXnr5HiTvuBTvrtnMOjzaTXiee4xs3C24=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/zp31PBTMHFvGgTWf-T6xQQCLSiVCpfgSGzqKOWmCp74=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/muddLvlz86OJbT-P9qBvgKHV1nlZ8l1ly8sol0s45vs=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/E1NyRU3gk4s6Om0BxrDyIMkjiF4uFAjYm4Qvttcd3Os=.hash
