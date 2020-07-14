@@ -12,6 +12,7 @@ namespace BlazorSignalRApp.Client.Pages
     public class CanvasComponent : ComponentBase
     {
         private Canvas2DContext _context;
+        private List<Canvas2DContext> _contextList = new List<Canvas2DContext>();
         protected int i;
         protected BECanvasComponent _canvasReference 
         { 
@@ -116,17 +117,34 @@ namespace BlazorSignalRApp.Client.Pages
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            int j = 0;
-            foreach (RealTime item in this._dashboardData)
+            
+            if (firstRender == false)
             {
-                this._context = await this._canvasReferenceList[j].CreateCanvas2DAsync();
-
-                //Clear canvas
-                await this._context.ClearRectAsync(0, 0, _canvasReferenceList[j].Width, _canvasReferenceList[j].Height);
-                await this.DrawAvailabilityCardAsync(item);
-
-                j++;
+                int j = 0;
+                foreach (RealTime item in this._dashboardData)
+                {
+                    this._context = await this._canvasReferenceList[j].CreateCanvas2DAsync();
+                    this._contextList.Add(this._context);
+                    //Clear canvas
+                    await this._context.ClearRectAsync(0, 0, _canvasReferenceList[j].Width, _canvasReferenceList[j].Height);
+                    await this.DrawAvailabilityCardAsync(item);
+                    j++;
+                }
             }
+            //else
+            //{
+            //    int j = 0;
+            //    foreach (RealTime item in this._dashboardData)
+            //    {
+            //        this._context = this._contextList[j];
+
+                    //Clear canvas
+                    //await this._context.ClearRectAsync(0, 0, _canvasReferenceList[j].Width, _canvasReferenceList[j].Height);
+                    //await this.DrawAvailabilityCardAsync(item);
+
+                    //j++;
+                //}
+            //}
 
         }
 

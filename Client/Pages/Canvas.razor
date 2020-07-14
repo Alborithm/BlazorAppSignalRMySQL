@@ -13,6 +13,11 @@
 </div>
 @if (_dashboardData == null)
 {
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     <p><em>Loading...</em></p>
 }
 else
@@ -20,18 +25,21 @@ else
     <div class="container">
         <div class="row">
         @{i = 0;
-        //if (_canvasReferenceList.Count >= 1)
-        //{
-        //    _canvasReferenceList.Clear();
-        //    _canvasReferenceList.TrimExcess();
-        //}
+            // Get first item to start iteration for layout
+            RealTime lastItem = _dashboardData.First();
         }
         @foreach (var item in _dashboardData)
         {
+                // Creates horizontal line to divide between lines
+                if(item.LineId != lastItem.LineId)
+                {
+                    <hr style="width:90%;text-align:left;margin-left:0">
+                }
                 <div class="col text-center">
                     <BECanvas Width="250" Height="200" @ref="_canvasReference"></BECanvas>
                 </div>
                 i++;
+                lastItem = item;
         }
         </div>
     </div>
