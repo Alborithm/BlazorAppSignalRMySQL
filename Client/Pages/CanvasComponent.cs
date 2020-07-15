@@ -155,7 +155,15 @@ namespace BlazorSignalRApp.Client.Pages
             string LineName = data.LineName;
             string OperationName = data.OpName;
             double Availability = 0.75;
-            string TimeToRepair = "00:00:00";
+            string TimeToRepair;
+            if (data.Available)
+            {
+                TimeToRepair = "00:00:00";
+            }
+            else
+            {
+                TimeToRepair = CalculateDowntimeTimer(data.LastEventTime);
+            }
             string TotalDowntime = "00:00:00";
             bool Available = data.Available;
 
@@ -262,51 +270,68 @@ namespace BlazorSignalRApp.Client.Pages
             await this._context.FillTextAsync( (Availability*100).ToString() + " %", 98, 175); 
 
         }
-/*
-        public class RealTimeDashboardData
+
+        private string CalculateDowntimeTimer(DateTime time)
         {
-            private string _lineName;
-            public string LineName
+            TimeSpan outputTime = DateTime.UtcNow - time;
+
+            string outputString = outputTime.ToString(@"hh\:mm\:ss", System.Globalization.CultureInfo.InvariantCulture);
+            if(outputTime.Days >= 1)
             {
-                get { return _lineName; }
-                set { _lineName = value; }
+                outputString = outputTime.ToString(@"d\.hh\:mm\:ss", System.Globalization.CultureInfo.InvariantCulture);
             }
+
+            //string outputString = $"{Math.Truncate(outputTime.TotalHours)}:{outputTime.Minutes}:{outputTime.Seconds}";
             
-            private string _operationName;
-            public string OperationName
-            {
-                get { return _operationName; }
-                set { _operationName = value; }
-            }
-            
-            private double _availability;
-            public double Availability
-            {
-                get { return _availability; }
-                set { _availability = value; }
-            }
-            
-            private string _timeToRepair;
-            public string TimeToRepair
-            {
-                get { return _timeToRepair; }
-                set { _timeToRepair = value; }
-            }
-            
-            private string _totalDowntime;
-            public string TotalDowntime
-            {
-                get { return _totalDowntime; }
-                set { _totalDowntime = value; }
-            }
-            
-            private bool _available;
-            public bool Available
-            {
-                get { return _available; }
-                set { _available = value; }
-            }
+            // string outputString = String.Format("{0:c}", outputTime);
+
+            return outputString;
         }
+        /*
+       public class RealTimeDashboardData
+       {
+           private string _lineName;
+           public string LineName
+           {
+               get { return _lineName; }
+               set { _lineName = value; }
+           }
+
+           private string _operationName;
+           public string OperationName
+           {
+               get { return _operationName; }
+               set { _operationName = value; }
+           }
+
+           private double _availability;
+           public double Availability
+           {
+               get { return _availability; }
+               set { _availability = value; }
+           }
+
+           private string _timeToRepair;
+           public string TimeToRepair
+           {
+               get { return _timeToRepair; }
+               set { _timeToRepair = value; }
+           }
+
+           private string _totalDowntime;
+           public string TotalDowntime
+           {
+               get { return _totalDowntime; }
+               set { _totalDowntime = value; }
+           }
+
+           private bool _available;
+           public bool Available
+           {
+               get { return _available; }
+               set { _available = value; }
+           }
+       }
 */
     }
 }

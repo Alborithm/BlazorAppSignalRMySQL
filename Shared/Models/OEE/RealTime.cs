@@ -60,6 +60,20 @@ namespace BlazorSignalRApp.Shared.Models.OEE
             set { _failCode = value; }
         }
         
+        private DateTime _lastEventTime;
+        public DateTime LastEventTime
+        {
+            get { return _lastEventTime; }
+            set { _lastEventTime = value; }
+        }
+        
+        private DateTime _totalShiftDowntime;
+        public DateTime TotalShiftDowntime
+        {
+            get { return _totalShiftDowntime; }
+            set { _totalShiftDowntime = value; }
+        }
+        
         
     }
 }

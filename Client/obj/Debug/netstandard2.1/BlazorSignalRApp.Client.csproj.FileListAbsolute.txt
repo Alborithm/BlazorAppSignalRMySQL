@@ -470,8 +470,8 @@
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/Razor/Pages/RealTimeData.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/RazorDeclaration/Pages/Canvas.razor.g.cs
 /Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/Razor/Pages/Canvas.razor.g.cs
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/fwzKsR3RjUHArX1zzvExbYT91ujncvzNRC2ls0_9nzo=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/AOKpeBqBOO_ejjHf0fuMQrBeWpeR3AO8aCdTQHeiZaI=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/xPp8XPFaRztvG8Q8oN8L7zlIkwwAykeRuBExIRxXIkU=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/xAGi_pytrP_TbR6yhfb58ElHt-g4L7IAP2ZLHVjTt2Q=.hash
-/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/d78Bh7VYFgVWu8LdbZGQduG7y1-q20hWUig8Us2RmC0=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/HthmJBScZRl-5KGRgOrsgDAp-bxPAIqJhNjy17qIlGc=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/P70PcoJiKnLcQoyS7OkdGmHe0XRD11_WdPxfVjALKA4=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/Y6JdgPp1lGFEkeWfPBBEIPnSB19PKU3vf8W-2HpYgYc=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/7a6amgR-B7ssTMI3L_TN6ROd-JzYMsIC8zQ_EkXpAuI=.hash
+/Users/gerardoalbor/Repositories/BlazorTest/ChatTutorial/BlazorSignalRApp/Client/obj/Debug/netstandard2.1/integrity/Q_ZJC3l_KTPtbddal46e7qBq5cYpHeLlPVy_Vt1DTvE=.hash
