@@ -3,6 +3,7 @@
 @using BlazorSignalRApp.Shared.Models.OEE
 @using Microsoft.AspNetCore.SignalR.Client
 @using Blazor.Extensions
+@using System.Threading
 @inject NavigationManager NavigationManager
 @inject HttpClient Http
 
@@ -41,6 +42,19 @@ else
                 i++;
                 lastItem = item;
         }
+        @{
+            if(!TimerInitialized)
+            {
+                DrawCallBack = new System.Threading.Timer(this.TimerRedraw, autoEvent, 1000, 1000);
+                TimerInitialized = true;
+            }
+            else
+            {
+                <div>
+                    <p>Timer initialized and working, maybe</p>
+                </div>
+            }
+        }
         </div>
     </div>
 }
@@ -49,6 +63,9 @@ else
 @code{
     private List<RealTime> EquipmentList;
     private HubConnection hubConnection;
+    AutoResetEvent autoEvent = new AutoResetEvent(false);
+    private bool TimerInitialized = false;
+    private Timer DrawCallBack;
 
     protected override async Task OnInitializedAsync()
     {
@@ -99,5 +116,11 @@ else
     public void Dispose()  
     {  
         _ = hubConnection.DisposeAsync();  
-    }  
+    }
+
+    public async void TimerRedraw(Object state)
+    {
+        AutoResetEvent autoEvent = (AutoResetEvent)state;
+        StateHasChanged();
+    }
 }
