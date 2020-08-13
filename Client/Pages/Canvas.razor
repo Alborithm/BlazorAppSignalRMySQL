@@ -42,6 +42,7 @@ else
                 i++;
                 lastItem = item;
         }
+        @{canvasListCreated = true;}
         @{
             if(!TimerInitialized)
             {
@@ -50,9 +51,7 @@ else
             }
             else
             {
-                <div>
-                    <p>Timer initialized and working, maybe</p>
-                </div>
+                
             }
         }
         </div>
@@ -63,6 +62,7 @@ else
 @code{
     private List<RealTime> EquipmentList;
     private HubConnection hubConnection;
+    private bool LoadedData = false;
     AutoResetEvent autoEvent = new AutoResetEvent(false);
     private bool TimerInitialized = false;
     private Timer DrawCallBack;

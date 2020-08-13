@@ -9,7 +9,7 @@ using BlazorSignalRApp.Shared.Models.OEE;
 
 namespace BlazorSignalRApp.Client.Pages
 {
-    public class CanvasComponent : ComponentBase
+    public class DemoDashboardComponent : ComponentBase
     {
         private Canvas2DContext _context;
         private List<Canvas2DContext> _contextList = new List<Canvas2DContext>();
@@ -45,7 +45,7 @@ namespace BlazorSignalRApp.Client.Pages
         protected List<BECanvasComponent> _canvasReferenceList = new List<BECanvasComponent>();
 
         // https://github.com/dotnet/aspnetcore/issues/13358 capture references in a loop
-        protected List<RealTime> _dashboardData;
+        protected List<RealTime> _dashboardData = null;
 
 
         // Drawing vairables Colors
@@ -72,22 +72,25 @@ namespace BlazorSignalRApp.Client.Pages
 
         }
 
+
+        protected async Task CreateData()
+        {
+
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            
-            if (firstRender == false)
+            int j = 0;
+            foreach (RealTime item in this._dashboardData)
             {
-                int j = 0;
-                foreach (RealTime item in this._dashboardData)
-                {
-                    this._context = await this._canvasReferenceList[j].CreateCanvas2DAsync();
-                    this._contextList.Add(this._context);
-                    //Clear canvas
-                    await this._context.ClearRectAsync(0, 0, _canvasReferenceList[j].Width, _canvasReferenceList[j].Height);
-                    await this.DrawAvailabilityCardAsync(item);
-                    j++;
-                }
+                this._context = await this._canvasReferenceList[j].CreateCanvas2DAsync();
+                this._contextList.Add(this._context);
+                //Clear canvas
+                await this._context.ClearRectAsync(0, 0, _canvasReferenceList[j].Width, _canvasReferenceList[j].Height);
+                await this.DrawAvailabilityCardAsync(item);
+                j++;
             }
+
             //else
             //{
             //    int j = 0;
@@ -108,11 +111,10 @@ namespace BlazorSignalRApp.Client.Pages
         protected async Task DrawAvailabilityCardAsync(
             RealTime data)
         {
-            Random rnd = new Random();
+            //Random rnd = new Random();
             string LineName = data.LineName;
             string OperationName = data.OpName;
-            double Availability = rnd.NextDouble() * 0.45 + 0.45;
-            //double Availability = 0.75;
+            double Availability = 0.75;
             string TimeToRepair;
             if (data.Available)
             {
@@ -132,22 +134,19 @@ namespace BlazorSignalRApp.Client.Pages
             await this._context.SetFontAsync(TimerLabelsFont);
             await this._context.SetFillStyleAsync(TimerLabelsColor);
             await this._context.FillTextAsync("Downtime", 5, 18);
-            // For Showcase
-            // await this._context.FillTextAsync("Total Downtime", 130, 18);
+            await this._context.FillTextAsync("Total Downtime", 130, 18);
 
             // Time counters
             await this._context.MoveToAsync(2,20);
             await this._context.RectAsync(5,20,118,30);
-            // For Showcase
-            // await this._context.MoveToAsync(127,25);
-            // await this._context.RectAsync(127,20,118,30);
+            await this._context.MoveToAsync(127,25);
+            await this._context.RectAsync(127,20,118,30);
             await this._context.StrokeAsync();
 
             // Counter Numbers
             await this._context.SetFontAsync(TimerCountersFont);
             await this._context.FillTextAsync(TimeToRepair, 20, 45);
-            // For Showcase
-            // await this._context.FillTextAsync(TotalDowntime, 140, 45);
+            await this._context.FillTextAsync(TotalDowntime, 140, 45);
 
             // Reporter Area
             await this._context.MoveToAsync(0,60);
@@ -228,8 +227,7 @@ namespace BlazorSignalRApp.Client.Pages
             await this._context.SetFillStyleAsync(RealTimeFontColor);
             await this._context.SetFontAsync(AvailabilityLabelFont);
             await this._context.FillTextAsync("A = ", 15, 160);
-            double x = Math.Truncate(Availability * 100);
-            await this._context.FillTextAsync( string.Format("{0:N0}%", x) , 98, 175); 
+            await this._context.FillTextAsync( (Availability*100).ToString() + " %", 98, 175); 
 
         }
 

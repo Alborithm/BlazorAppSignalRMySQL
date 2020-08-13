@@ -74,6 +74,13 @@ namespace BlazorSignalRApp.Shared.Models.OEE
             set { _totalShiftDowntime = value; }
         }
         
+        private double _availabilityPercent;
+        public double AvailabilityPercent
+        {
+            get { return _availabilityPercent  ; }
+            set { _availabilityPercent  = value; }
+        }
+        
         
     }
 }

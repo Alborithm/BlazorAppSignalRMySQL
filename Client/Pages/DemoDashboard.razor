@@ -1,0 +1,77 @@
+@page "/demoDashboard"
+
+@using BlazorSignalRApp.Shared.Models.OEE
+@using Microsoft.AspNetCore.SignalR.Client
+@using Blazor.Extensions
+@using System.Threading
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+
+@inherits DemoDashboardComponent
+
+<div>
+    <h3>Real Time Dashboard</h3>
+</div>
+@if (_dashboardData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+        @{i = 0;
+            // Get first item to start iteration for layout
+            RealTime lastItem = _dashboardData.First();
+        }
+        @foreach (var item in _dashboardData)
+        {
+                // Creates horizontal line to divide between lines
+                if(item.LineId != lastItem.LineId)
+                {
+                    <hr style="width:90%;text-align:left;margin-left:0">
+                }
+                <div class="col text-center">
+                    <BECanvas Width="250" Height="200" @ref="_canvasReference"></BECanvas>
+                </div>
+                i++;
+                lastItem = item;
+        }
+        
+        
+        </div>
+    </div>
+}
+
+@code{
+
+    protected override void OnInitialized()
+    {
+    _dashboardData = new List<RealTime>();
+            _dashboardData.Add(new RealTime()
+            {
+                LineId = 1,
+                LineName = "TestLine",
+                OpNumber = 10,
+                OpName = "OperationTest",
+                Available = true,
+                LastEventTime = DateTime.Now,
+                TotalShiftDowntime = new DateTime(0,0,0,1,34,25),
+                AvailabilityPercent = 0.78
+            });
+            _dashboardData.Add(new RealTime()
+            {
+                LineId = 1,
+                LineName = "TestLine",
+                OpNumber = 20,
+                OpName = "OperationTest2",
+                Available = true,
+                LastEventTime = DateTime.Now,
+                TotalShiftDowntime = new DateTime(0,0,0,1,34,25),
+                AvailabilityPercent = 0.78
+            });
+
+            StateHasChanged();
+
+    }
+}
